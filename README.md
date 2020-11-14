@@ -13,3 +13,9 @@ Enter to the container
 ```
 docker exec -it practica-aws bash
 ```
+
+### Create AWS Profile
+
+```
+aws configure --profile aws-workshop
+```

@@ -1,7 +1,27 @@
 {
   "variables": {
     "aws_profile": "aws-workshop",
-    "aws_region": "us-east-1"
-    "aws_base_ami": ""
-  }
+    "aws_region": "us-east-1",
+    "aws_base_ami": "ubuntu/images/*ubuntu-focal-20.04-amd64-server-*",
+    "aws_instance_type": "t2.micro"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "profile": "{{user `aws_profile`}}",
+      "region": "{{user `aws_region`}}",
+      "source_ami_filter": {
+        "filters": {
+          "name": "{{user `aws_base_ami`}}",
+          "virtualization-type": "hvm",
+          "root-device-type": "ebs"
+        },
+        "owners": ["099720109477"],
+        "most_recent": true
+      },
+      "instance_type": "{{user `aws_instance_type`}}",
+      "ssh_username": "ubuntu",
+      "ami_name": "aws-workshop-ami-{{timestamp}}"
+    }
+  ]
 }
