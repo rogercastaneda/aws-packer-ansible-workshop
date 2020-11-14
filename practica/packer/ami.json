@@ -1,0 +1,7 @@
+{
+  "variables": {
+    "aws_profile": "aws-workshop",
+    "aws_region": "us-east-1"
+    "aws_base_ami": ""
+  }
+}
