@@ -1,27 +1,26 @@
 {
   "variables": {
     "aws_profile": "aws-workshop",
-    "aws_region": "us-east-1",
-    "aws_base_ami": "ubuntu/images/*ubuntu-focal-20.04-amd64-server-*",
-    "aws_instance_type": "t2.micro"
+    "aws_region": "us-east-2",
+    "aws_base_ami": "ami-0a91cd140a1fc148a",
+    "aws_instance_type": "t2.micro",
+    "aws_ec2_user": "ubuntu"
   },
   "builders": [
     {
       "type": "amazon-ebs",
       "profile": "{{user `aws_profile`}}",
       "region": "{{user `aws_region`}}",
-      "source_ami_filter": {
-        "filters": {
-          "name": "{{user `aws_base_ami`}}",
-          "virtualization-type": "hvm",
-          "root-device-type": "ebs"
-        },
-        "owners": ["099720109477"],
-        "most_recent": true
-      },
+      "source_ami": "{{user `aws_base_ami`}}",
       "instance_type": "{{user `aws_instance_type`}}",
-      "ssh_username": "ubuntu",
+      "ssh_username": "{{user `aws_ec2_user`}}",
       "ami_name": "aws-workshop-ami-{{timestamp}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible",
+      "playbook_file": "./ansible/playbook.yml"
     }
   ]
 }

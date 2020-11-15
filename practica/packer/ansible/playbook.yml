@@ -1,0 +1,49 @@
+---
+- name: "Apache / PHP workshop"
+  hosts: all
+  become: true
+  become_method: sudo
+  # vars_file:
+  #   - vars/default.yml
+
+  tasks:
+    - name: Update and upgrade apt packages
+      become: true
+      apt:
+        upgrade: yes
+        update_cache: yes
+
+    - name: Install prerequisites
+      apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
+      loop: ["aptitude"]
+
+    - name: Install Apache and PHP
+      apt: name={{ item }} update_cache=yes state=latest
+      loop:
+        [
+          "apache2",
+          "php",
+          "php-mysql",
+          "libapache2-mod-php",
+          "wget",
+          "curl",
+          "git",
+          "composer",
+          "php-mbstring",
+          "php-json",
+          "php-curl",
+          "redis",
+        ]
+      notify:
+        - Reload Apache
+
+    - name: Enable mod_rewrite
+      apache2_module: name=rewrite state=present
+      notify:
+        - Reload Apache
+
+  handlers:
+    - name: Reload Apache
+      service:
+        name: apache2
+        state: reloaded
