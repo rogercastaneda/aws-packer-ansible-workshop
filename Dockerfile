@@ -22,3 +22,5 @@ RUN unzip terraform_${TERRAFORM_INSTALL_VERSION}_linux_amd64.zip && \
   unzip packer_${PACKER_INSTALL_VERSION}_linux_amd64.zip && \
   mv terraform /usr/local/bin/ && \
   mv packer /usr/local/bin
+
+RUN adduser --disabled-password --gecos "" workshop

@@ -2,9 +2,8 @@
 - name: "Apache / PHP workshop"
   hosts: all
   become: true
-  become_method: sudo
-  # vars_file:
-  #   - vars/default.yml
+  vars_files:
+    - vars/default.yml
 
   tasks:
     - name: Update and upgrade apt packages
@@ -41,6 +40,15 @@
       apache2_module: name=rewrite state=present
       notify:
         - Reload Apache
+
+    - name: Ensure directories are 0755
+      command: find {{ path }} -type d -exec chmod 0755 {} \;
+
+    - name: Ensure files are 0644
+      command: find {{ path }} -type d -exec chmod 0644 {} \;
+
+  roles:
+    - grzegorznowak.nvm_node
 
   handlers:
     - name: Reload Apache

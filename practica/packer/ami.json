@@ -1,7 +1,7 @@
 {
   "variables": {
     "aws_profile": "aws-workshop",
-    "aws_region": "us-east-2",
+    "aws_region": "us-east-1",
     "aws_base_ami": "ami-0a91cd140a1fc148a",
     "aws_instance_type": "t2.micro",
     "aws_ec2_user": "ubuntu"
