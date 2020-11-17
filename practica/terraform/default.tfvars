@@ -1,1 +1,2 @@
-AWS_AMI = "ami-0c5b43312976c9c82"
+AWS_AMI = "ami-095f5c60b26cfcf45"
+SG_NAME = "SG-Workshop"

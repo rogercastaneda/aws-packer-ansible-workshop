@@ -15,3 +15,8 @@ resource "aws_instance" "ec2-demo" {
 
   vpc_security_group_ids = [aws_security_group.workshop.id]
 }
+
+resource "aws_eip" "lb" {
+  instance = aws_instance.ec2-demo.id
+  vpc      = true
+}

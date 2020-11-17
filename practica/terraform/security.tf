@@ -1,6 +1,6 @@
 resource "aws_security_group" "workshop" {
   provider = aws.workshop
-  name     = "SG-Workshop"
+  name     = var.SG_NAME
 
   ingress {
     from_port   = 22
@@ -11,6 +11,12 @@ resource "aws_security_group" "workshop" {
   ingress {
     from_port   = 80
     to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port   = 443
+    to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }

@@ -29,7 +29,7 @@ aws configure --profile aws-workshop
 ### Installing ansible roles
 
 ```
-cd practica/packer/ansible
+cd /app/packer/ansible
 ansible-galaxy install -r requirements.yaml
 ```
 
@@ -38,7 +38,7 @@ ansible-galaxy install -r requirements.yaml
 #### Creating AMI
 
 ```
-cd practica/packer
+cd /app/packer
 packer build ami.json
 ```
 
@@ -47,7 +47,7 @@ packer build ami.json
 #### Init terraform
 
 ```
-cd practica/terraform
+cd /app/terraform
 terraform init
 ```
 
@@ -66,5 +66,5 @@ terraform apply --var-file=default.tfvars
 #### Destroying/Reverting Terraform changes
 
 ```
-terraform destroy
+terraform destroy --var-file=default.tfvars
 ```
